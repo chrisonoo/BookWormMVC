@@ -10,7 +10,7 @@ public class Book
     public string Title { get; set; } = null!;
 
     public int PublisherId { get; set; }
-    public Publisher Publisher { get; set; } = null!;
+    public Publisher? Publisher { get; set; }
 
     public ICollection<BookContributor>? BookContributors { get; set; }
 }

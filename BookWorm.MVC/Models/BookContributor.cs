@@ -6,11 +6,11 @@ namespace BookWorm.MVC.Models;
 public class BookContributor
 {
     public int BookId { get; set; }
-    public Book Book { get; set; } = null!;
+    public Book? Book { get; set; }
 
     public int ContributorId { get; set; }
-    public Contributor Contributor { get; set; } = null!;
+    public Contributor? Contributor { get; set; }
 
     public int ContributorRoleId { get; set; }
-    public ContributorRole ContributorRole { get; set; } = null!;
+    public ContributorRole? ContributorRole { get; set; }
 }
