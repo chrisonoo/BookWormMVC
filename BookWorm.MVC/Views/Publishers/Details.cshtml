@@ -22,3 +22,27 @@
     <a asp-action="Edit" asp-route-id="@Model?.Id">Edit</a> |
     <a asp-action="Index">Back to List</a>
 </div>
+
+@if (Model != null)
+{
+    <h4 class="mt-5">Books published by <b>@Model.Name</b></h4>
+
+    if(Model.Books != null && Model.Books.Any())
+    {
+        foreach (var group in Model.Books.GroupBy(book => book.PublicationYear).OrderByDescending(g => g.Key))
+        {
+            <h5>@group.Key</h5>
+
+            <ul>
+                @foreach (var book in group.OrderBy(b => b.Title))
+                {
+                    <li>@book.Title</li>
+                }
+            </ul>
+        }
+    }
+    else
+    {
+        <p>There are no books for this publisher.</p>
+    }
+}

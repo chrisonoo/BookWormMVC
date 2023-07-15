@@ -1,5 +1,6 @@
 ﻿using BookWorm.MVC.Data;
 using BookWorm.MVC.Models;
+using BookWorm.MVC.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -17,9 +18,24 @@ public class PublishersController : Controller
     // GET: Publishers
     public async Task<IActionResult> Index()
     {
-        return _context.Publishers != null ?
-                    View(await _context.Publishers.ToListAsync()) :
-                    Problem("Entity set 'ApplicationDbContext.Publishers'  is null.");
+        if(_context.Publishers != null)
+        {
+            var publishers = await _context.Publishers
+                .Include(p => p.Books)
+                .ToListAsync();
+            var publishersToView = publishers.Select(p => new PublisherViewModel
+            {
+                Publisher = p,
+                BookCount = p.Books == null ? 0 : p.Books.Count
+            }).ToList();
+
+            return View(publishersToView);
+        }
+        else
+        {
+            // Returning an empty List will allows to display the appropriate message in the View
+            return View(new List<PublisherViewModel>());
+        }
     }
 
     // GET: Publishers/Details/5
@@ -31,6 +47,7 @@ public class PublishersController : Controller
         }
 
         var publisher = await _context.Publishers
+            .Include(p => p.Books)
             .FirstOrDefaultAsync(m => m.Id == id);
         if(publisher == null)
         {
