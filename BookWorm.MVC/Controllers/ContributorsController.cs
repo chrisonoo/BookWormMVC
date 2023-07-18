@@ -83,7 +83,7 @@ public class ContributorsController : Controller
     // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
     [HttpPost]
     [ValidateAntiForgeryToken]
-    public async Task<IActionResult> Edit(int id, [Bind("Id,Name")] Contributor contributor)
+    public async Task<IActionResult> Edit(int id, [Bind("Id,Name,IsActive")] Contributor contributor)
     {
         if(id != contributor.Id)
         {
@@ -143,7 +143,7 @@ public class ContributorsController : Controller
         var contributor = await _context.Contributors.FindAsync(id);
         if(contributor != null)
         {
-            _context.Contributors.Remove(contributor);
+            contributor.IsActive = false;
         }
 
         await _context.SaveChangesAsync();

@@ -23,5 +23,9 @@ public class ApplicationDbContext : DbContext
         modelBuilder.Entity<ContributorRole>()
             .Property(r => r.IsActive)
             .HasDefaultValue(true);
+
+        modelBuilder.Entity<Contributor>()
+            .Property(c => c.IsActive)
+            .HasDefaultValue(true);
     }
 }
