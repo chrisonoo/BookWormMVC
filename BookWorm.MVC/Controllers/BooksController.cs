@@ -18,8 +18,10 @@ public class BooksController : Controller
     // GET: Books
     public async Task<IActionResult> Index()
     {
-        var applicationDbContext = _context.Books.Include(b => b.Publisher);
-        return View(await applicationDbContext.ToListAsync());
+        var books = await _context.Books
+            .Include(b => b.Publisher)
+            .ToListAsync();
+        return View(books);
     }
 
     // GET: Books/Details/5
@@ -53,7 +55,7 @@ public class BooksController : Controller
     // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
     [HttpPost]
     [ValidateAntiForgeryToken]
-    public async Task<IActionResult> Create([Bind("Id,Title,PublisherId")] Book book)
+    public async Task<IActionResult> Create([Bind("Id,Title,PublicationYear,PublisherId")] Book book)
     {
         if(ModelState.IsValid)
         {
@@ -87,7 +89,7 @@ public class BooksController : Controller
     // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
     [HttpPost]
     [ValidateAntiForgeryToken]
-    public async Task<IActionResult> Edit(int id, [Bind("Id,Title,PublisherId")] Book book)
+    public async Task<IActionResult> Edit(int id, [Bind("Id,Title,PublicationYear,PublisherId")] Book book)
     {
         if(id != book.Id)
         {

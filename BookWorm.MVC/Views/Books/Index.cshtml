@@ -1,10 +1,10 @@
 ﻿@model IEnumerable<BookWorm.MVC.Models.Book>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Books";
 }
 
-<h1>Index</h1>
+<h1>@ViewData["Title"]</h1>
 
 <p>
     <a asp-action="Create">Create New</a>
@@ -14,6 +14,9 @@
         <tr>
             <th>
                 @Html.DisplayNameFor(model => model.Title)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PublicationYear)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Publisher)
@@ -27,6 +30,9 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Title)
             </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PublicationYear)
+                </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Publisher.Name)
             </td>
