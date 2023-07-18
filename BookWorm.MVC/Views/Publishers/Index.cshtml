@@ -2,6 +2,8 @@
 
 @{
     ViewData["Title"] = "Publishers";
+    var activePublishers = Model?.Where(p => p.IsActive == true);
+    var inactivePublishers = Model?.Where(p => p.IsActive == false);
 }
 
 <h1>@ViewData["Title"]</h1>
@@ -12,37 +14,86 @@
 
 @if(Model != null && Model.Any())
 {
-    <table class="table">
-        <thead>
-            <tr>
-                <th>
-                    @Html.DisplayNameFor(model => model.Publisher.Name)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.BookCount)
-                </th>
-                <th></th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach(var item in Model)
-            {
+    <h3>Active Publishers</h3>
+
+    if(activePublishers != null && activePublishers.Any())
+    {
+        <table class="table">
+            <thead>
                 <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Publisher.Name)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.BookCount)
-                    </td>
-                    <td>
-                        <a asp-action="Edit" asp-route-id="@item.Publisher.Id">Edit</a> |
-                        <a asp-action="Details" asp-route-id="@item.Publisher.Id">Details</a> |
-                        <a asp-action="Delete" asp-route-id="@item.Publisher.Id">Delete</a>
-                    </td>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Name)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.BookCount)
+                    </th>
+                    <th class="col-2"></th>
                 </tr>
-            }
-        </tbody>
-    </table>
+            </thead>
+            <tbody>
+                @foreach(var item in activePublishers)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Name)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.BookCount)
+                        </td>
+                        <td>
+                            <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                            <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                            <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+    else
+    {
+        <p>No active publishers available.</p>
+    }
+
+    <h3>Inactive Publishers</h3>
+
+    if(inactivePublishers != null && inactivePublishers.Any())
+    {
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Name)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.BookCount)
+                    </th>
+                    <th class="col-2"></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach(var item in inactivePublishers)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Name)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.BookCount)
+                        </td>
+                        <td>
+                            <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                            <a asp-action="Details" asp-route-id="@item.Id">Details</a> 
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+    else
+    {
+        <p>No inactive publishers available.</p>
+    }
 }
 else
 {

@@ -25,9 +25,13 @@ public class PublishersController : Controller
                 .ToListAsync();
             var publishersToView = publishers.Select(p => new PublisherViewModel
             {
-                Publisher = p,
-                BookCount = p.Books == null ? 0 : p.Books.Count
-            }).ToList();
+                Id = p.Id,
+                Name = p.Name,
+                BookCount = p.Books == null ? 0 : p.Books.Count,
+                IsActive = p.IsActive
+            })
+                .OrderByDescending(p => p.BookCount)
+                .ToList();
 
             return View(publishersToView);
         }
@@ -100,7 +104,7 @@ public class PublishersController : Controller
     // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
     [HttpPost]
     [ValidateAntiForgeryToken]
-    public async Task<IActionResult> Edit(int id, [Bind("Id,Name")] Publisher publisher)
+    public async Task<IActionResult> Edit(int id, [Bind("Id,Name,IsActive")] Publisher publisher)
     {
         if(id != publisher.Id)
         {
@@ -160,7 +164,7 @@ public class PublishersController : Controller
         var publisher = await _context.Publishers.FindAsync(id);
         if(publisher != null)
         {
-            _context.Publishers.Remove(publisher);
+            publisher.IsActive = false;
         }
 
         await _context.SaveChangesAsync();
