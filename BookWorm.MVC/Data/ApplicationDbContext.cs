@@ -19,5 +19,9 @@ public class ApplicationDbContext : DbContext
         modelBuilder.Entity<Publisher>()
             .Property(p => p.IsActive)
             .HasDefaultValue(true);
+
+        modelBuilder.Entity<ContributorRole>()
+            .Property(r => r.IsActive)
+            .HasDefaultValue(true);
     }
 }
