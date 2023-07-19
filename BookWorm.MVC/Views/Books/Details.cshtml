@@ -21,6 +21,7 @@
             @Html.DisplayFor(model => model.Publisher.Name)
         </dd>
     </dl>
+<<<<<<< HEAD
     <h4>Autors:</h4>
     @if(Model.BookContributors != null && Model.BookContributors.Any())
     {
@@ -39,16 +40,24 @@
         <p>No active autors available.</p>
     }
 
+=======
+>>>>>>> 9275cb8287523d38d4d85e43dbd23cec5e5ff688
     <h4>Contributors:</h4>
     @if(Model.BookContributors != null && Model.BookContributors.Any())
     {
         <ul>
+<<<<<<< HEAD
             @foreach(var contributor in Model.BookContributors)
             {
                 @if (contributor.ContributorRole.Name != "Autor")
                 {
                     <li>@contributor.ContributorRole.Name - @contributor.Contributor.Name</li>
                 }
+=======
+            @foreach (var contributor in Model.BookContributors)
+            {
+                <li>@contributor.Contributor.Name - @contributor.ContributorRole.Name</li>
+>>>>>>> 9275cb8287523d38d4d85e43dbd23cec5e5ff688
             }
         </ul>
     }
