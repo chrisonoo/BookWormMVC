@@ -1,4 +1,9 @@
-﻿<!DOCTYPE html>
+﻿@{
+    var controller = ViewContext.RouteData.Values["Controller"]?.ToString();
+    var action = ViewContext.RouteData.Values["Action"]?.ToString();
+}
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -20,25 +25,25 @@
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                            <a class="nav-link text-dark @(controller == "Home" && action == "Index" ? "fw-bold" : "")" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Books" asp-action="Index">Books</a>
+                            <a class="nav-link text-dark @(controller == "Books" ? "fw-bold" : "")" asp-area="" asp-controller="Books" asp-action="Index">Books</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="BookContributors" asp-action="Index">Book Contributors</a>
+                            <a class="nav-link text-dark @(controller == "BookContributors" ? "fw-bold" : "")" asp-area="" asp-controller="BookContributors" asp-action="Index">Book Contributors</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Contributors" asp-action="Index">Contributors</a>
+                            <a class="nav-link text-dark @(controller == "Contributors" ? "fw-bold" : "")" asp-area="" asp-controller="Contributors" asp-action="Index">Contributors</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="ContributorRoles" asp-action="Index">Contributor Roles</a>
+                            <a class="nav-link text-dark @(controller == "ContributorRoles" ? "fw-bold" : "")" asp-area="" asp-controller="ContributorRoles" asp-action="Index">Contributor Roles</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Publishers" asp-action="Index">Publishers</a>
+                            <a class="nav-link text-dark @(controller == "Publishers" ? "fw-bold" : "")" asp-area="" asp-controller="Publishers" asp-action="Index">Publishers</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                            <a class="nav-link text-dark @(controller == "Home" && action == "Privacy" ? "fw-bold" : "")" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
                         </li>
                     </ul>
                 </div>
