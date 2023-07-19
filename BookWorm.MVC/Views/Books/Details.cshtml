@@ -29,6 +29,21 @@
             @Html.DisplayFor(model => model.Publisher.Name)
         </dd>
     </dl>
+    <h4>Contributors:</h4>
+    @if(Model.BookContributors != null && Model.BookContributors.Any())
+    {
+        <ul>
+            @foreach (var contributor in Model.BookContributors)
+            {
+                <li>@contributor.Contributor.Name - @contributor.ContributorRole.Name</li>
+            }
+        </ul>
+    }
+    else
+    {
+        <p>No active contributors available.</p>
+    }
+
 </div>
 <div>
     <a asp-action="Edit" asp-route-id="@Model?.Id">Edit</a> |
