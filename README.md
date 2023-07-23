@@ -19,7 +19,7 @@
         <img src="docs/img/logos/sqlserver.svg" width="40" height="40" alt="sqlserver"/>
         <img src="docs/img/logos/html5.svg" width="40" height="40" alt="html"/>
         <img src="docs/img/logos/css3.svg" width="40" height="40" alt="css"/>
-        <img src="docs/img/logos/jquery.svg" width="40" height="40" alt="css"/>
+        <img src="docs/img/logos/jquery.svg" width="40" height="40" alt="jquery"/>
         <img src="docs/img/logos/js.svg" width="40" height="40" alt="javascript"/>
         <img src="docs/img/logos/md.svg" width="40" height="40" alt="markdown"/>
         <img src="docs/img/logos/git.svg" width="40" height="40" alt="git"/>
@@ -29,9 +29,37 @@
 </div>
 <br>
 
+## Table of Contents
+
+- [Table of Contents](#table-of-contents)
+- [Description](#description)
+- [Functionality](#functionality)
+- [Database Schema (BookWormMVC)](#database-schema-bookwormmvc)
+  - [Table: Books](#table-books)
+  - [Table: Publishers](#table-publishers)
+  - [Table: Contributors](#table-contributors)
+  - [Table: Roles](#table-roles)
+  - [Table: BookContributors](#table-bookcontributors)
+- [Feature List](#feature-list)
+  - [Features for books:](#features-for-books)
+  - [Features for publishers:](#features-for-publishers)
+  - [Features for contributors:](#features-for-contributors)
+  - [Features for contributor roles:](#features-for-contributor-roles)
+  - [Features for book contributors:](#features-for-book-contributors)
+- [Technologies, Tools, Strategies and Programming Techniques](#technologies-tools-strategies-and-programming-techniques)
+- [Dependencies](#dependencies)
+- [Installation](#installation)
+- [Workflow](#workflow)
+- [Summary](#summary)
+- [Known Issues](#known-issues)
+- [Contribution](#contribution)
+- [License](#license)
+
 ## Description
 
 BookWormMVC is an educational project created using **ASP.NET Core 6 MVC** and **C# 10**. The main goal of the project was to understand and practically use the handling of `one-to-many` and `many-to-many` relationships in the database.
+
+[[top](#table-of-contents)]
 
 ## Functionality
 
@@ -41,33 +69,95 @@ In the application, a **soft delete** approach is used for deleting data in the 
 
 The main emphasis was placed on backend development, the frontend is the default ASP.NET template with minor CSS improvements and the implementation of bolding the active tab (controller) in the menu.
 
-## Technologies, Tools, Strategies and Programming Techniques
+[[top](#table-of-contents)]
 
-- ASP.NET Core 6 MVC
-- C# 10
-- Entity Framework (utilizing both **Annotations** and **Fluent API**)
-- Code First
-- Soft Delete
+## Database Schema (BookWormMVC)
 
-## Dependencies
+![Database diagram](./docs/img/database-diagram.png)
 
-The project uses standard dependencies for **ASP.NET Core 6 MVC**:
+### Table: Books
 
-- ASP.NET Core 6.0
-- Microsoft.EntityFrameworkCore.SqlServer 7.0.9
-- Microsoft.EntityFrameworkCore.Tools 7.0.9
-- Microsoft.VisualStudio.Web.CodeGeneration.Design 6.0.15
+**Description:** 
 
-## Installation
+The `Books` table stores information about books available in the system. Each record represents one book.
 
-1. Open a terminal on your computer and navigate to the location where you want to download the application.
-2. Run the command `git clone https://github.com/chrisonoo/BookWormMVC.git` and clone the application repository to the chosen folder on your disk.
-3. Open the solution in Visual Studio 2022 and run <kbd>Build > Build Solution</kbd>.
-4. Set the project **BookWorm.MVC** as the Startup Project.
-5. Open <kbd>Tools > NuGet Package Manager > Package Manager Console</kbd>.
-6. In the Package Manager Console, set <kbd>Default project: BookWorm.MVC</kbd>.
-7. Type the command `add-migration Initial` in the Package Manager Console and execute it. This command will create a database migration file and perform seeding.
-8. Type the command `upgrade database` in the Package Manager Console and execute it. This command will create a database and upload sample data into the local database.
+**Fields:**
+
+- **Id** (int): This is the primary key of the table. Each book has a unique identifier.
+- **Title** (string): This field stores the title of the book.
+- **PublicationYear** (int): This field stores the publication year of the book.
+- **PublisherId** (int): This field stores the book's publisher identifier (foreign key).
+
+**Relations:** 
+- The `Books` table is related to the `Publishers` table by a **many-to-one** relationship. Many books can have the same publisher.
+- The `Books` table is related to the `BookContributors` table by a **many-to-many** relationship. A book can have many contributors with roles, and a contributor with role can contribute to many books.
+
+### Table: Publishers
+
+**Description:**
+
+The `Publishers` table stores information about publishers who contributed to the creation of books. Each record represents one publisher.
+
+**Fields:**
+
+- **Id** (int): This is the primary key of the table.
+- **Name** (string): This field stores the name of the publisher.
+- **IsActive** (bool): This field stores information about whether the publisher is deleted (soft delete).
+
+**Relations:**
+
+- The `Publishers` table is related to the `Books` table by a **one-to-many** relationship. A Publisher can contribute to many Books, and a Book can have only one Publisher.
+
+### Table: Contributors
+
+**Description:**
+
+The `Contributors` table stores information about Contributors who contributed to the creation of Books. Each record represents one contributor.
+
+**Fields:**
+
+- **Id** (int): This is the primary key of the table.
+- **Name** (string): This field stores the name of the contributor.
+- **IsActive** (bool): This field stores information about whether the contributor is deleted (soft delete).
+
+**Relations:**
+
+- The `Contributors` table is related to the `BookContributors` table by a many-to-many relationship. A Contributor can contribute to many books, and a book can have many contributors.
+
+### Table: Roles
+
+**Description:**
+
+The `Roles` table stores various roles that a contributor can take in the creation of a book. Each record represents one role.
+
+**Fields:**
+
+- **Id** (int): This is the primary key of the table.
+- **Name** (string): This field stores the name of the role.
+
+**Relations:** 
+
+The `Roles` table is related to the `BookContributors` table by a many-to-many relationship. Each role can be assigned to many contributors, and a contributor can have many roles.
+
+### Table: BookContributors
+
+**Description:**
+
+The `BookContributors` table is a junction (intermediate/associative) table between the `Books`, `Contributors`, `Roles` tables. Each record represents a relationship between a book and a contributor in a specific role.
+
+**Fields:**
+
+- `Primary key` is composed of three foreign keys: BookId, ContributorId, RoleId (composite primary key).
+- **BookId** (int): This field is a foreign key referring to the `Books` table.
+- **ContributorId** (int): This field is a foreign key referring to the `Contributors` table.
+- **RoleId** (int): This field is a foreign key referring to the `Roles` table. It determines the role the contributor took in creating the book.
+
+**Relations:**
+
+- The `BookContributors` table is related to the `Books`, `Contributors` and `Roles` tables. Each relationship is defined by a unique set of three keys.
+
+
+[[top](#table-of-contents)]
 
 ## Feature List
 
@@ -86,24 +176,90 @@ The project uses standard dependencies for **ASP.NET Core 6 MVC**:
 
 ### Features for publishers:
 
+<div align="center">
+<img src="./docs/img/publishers-index.jpeg" width="150">
+<img src="./docs/img/publishers-create.jpeg" width="150">
+<img src="./docs/img/publishers-edit.jpeg" width="150">
+<img src="./docs/img/publishers-details.jpeg" width="150">
+<img src="./docs/img/publishers-delete.jpeg" width="150">
+</div>
+
 - Displaying a list of publishers
 - Creating, editing, displaying details, deleting a single publisher
 - Preview of the list of books published by the publisher
 
 ### Features for contributors:
 
+<div align="center">
+<img src="./docs/img/contributors-index.jpeg" width="150">
+<img src="./docs/img/contributors-create.jpeg" width="150">
+<img src="./docs/img/contributors-edit.jpeg" width="150">
+<img src="./docs/img/contributors-details.jpeg" width="150">
+<img src="./docs/img/contributors-delete.jpeg" width="150">
+</div>
+
 - Displaying a list of contributors
 - Creating, editing, displaying details, deleting a single contributor
 
 ### Features for contributor roles:
+
+<div align="center">
+<img src="./docs/img/contributorroles-index.jpeg" width="150">
+<img src="./docs/img/contributorroles-create.jpeg" width="150">
+<img src="./docs/img/contributorroles-edit.jpeg" width="150">
+<img src="./docs/img/contributorroles-details.jpeg" width="150">
+<img src="./docs/img/contributorroles-delete.jpeg" width="150">
+</div>
 
 - Displaying a list of contributor roles
 - Creating, editing, displaying details, deleting a single contributor role
 
 ### Features for book contributors:
 
+<div align="center">
+<img src="./docs/img/bookcontributors-index.jpeg" width="150">
+<img src="./docs/img/bookcontributors-create.jpeg" width="150">
+</div>
+
 - Displaying a list of contributors and their roles in creating a book
 - Creating, editing, displaying details, deleting a single book contributor
+
+[[top](#table-of-contents)]
+
+## Technologies, Tools, Strategies and Programming Techniques
+
+- ASP.NET Core 6 MVC
+- C# 10
+- Entity Framework (utilizing both **Annotations** and **Fluent API**)
+- Code First and Seeding
+- Soft Delete (tables: Contributors, Contributor Roles, Publishers)
+- Hard Delete (tables: Books, Book Contributor)
+
+[[top](#table-of-contents)]
+
+## Dependencies
+
+The project uses standard dependencies for **ASP.NET Core 6 MVC**:
+
+- ASP.NET Core 6.0
+- Microsoft.EntityFrameworkCore.SqlServer 7.0.9
+- Microsoft.EntityFrameworkCore.Tools 7.0.9
+- Microsoft.VisualStudio.Web.CodeGeneration.Design 6.0.15
+
+[[top](#table-of-contents)]
+
+## Installation
+
+1. Open a terminal on your computer and navigate to the location where you want to download the application.
+2. Run the command `git clone https://github.com/chrisonoo/BookWormMVC.git` and clone the application repository to the chosen folder on your disk.
+3. Open the solution in Visual Studio 2022 and run <kbd>Build > Build Solution</kbd>.
+4. Set the project **BookWorm.MVC** as the Startup Project.
+5. Open <kbd>Tools > NuGet Package Manager > Package Manager Console</kbd>.
+6. In the Package Manager Console, set <kbd>Default project: BookWorm.MVC</kbd>.
+7. Type the command `add-migration Initial` in the Package Manager Console and execute it. This command will create a database migration file and perform seeding.
+8. Type the command `upgrade-database` in the Package Manager Console and execute it. This command will create a database and upload sample data into the local database.
+
+[[top](#table-of-contents)]
 
 ## Workflow
 
@@ -151,38 +307,40 @@ The project uses standard dependencies for **ASP.NET Core 6 MVC**:
     - [ ] Create a filter in the `BookContributorsController` that filters out inactive Contributors in the `Book Contributors > Create` view.
     - [ ] Create a filter in the `BookContributorsController` that filters out inactive Contributor Roles in the `Book Contributors > Create` view.
 
+[[top](#table-of-contents)]
+
+## Summary
+
+The `BookWormMVC` project was not only a practical programming task, but also a valuable learning process in many areas. First and foremost, developing this project allowed for the adoption of **the methodology of dividing tasks into smaller**, more manageable pieces. This approach to task management contributed to **improving efficiency** and understanding the entire process of creating an application.
+
+During the creation of the project, I also learned how important it is to **develop documentation**. Documentation is not only a necessary tool for other developers, but also a way to organize thoughts and better understand this project. Moreover, through the process of creating documentation, I learned to better **predict the consequences** of my design decisions, especially in the context of database architecture and ways of presenting this data in specific views.
+
+Another important element of learning was **understanding the process of planning an application**. Planning is not just choosing technologies and tools, but also predicting potential problems, setting priorities, and making decisions that will shape the entire project.
+
+[[top](#table-of-contents)]
+
+## Known Issues
+
+During the creation and testing of the `BookWormMVC` project, I noticed several issues that need to be addressed:
+
+1. **Several warnings about a possible null value:** While coding and testing the project, I encountered **CS8602: Dereference of a possibly null reference warnings**. This is a potential source of errors during the application's operation, especially when this value is used in calculations or operations that are not prepared for null values.
+2. **Improperly designed table `BookContributors` connecting Books, Contributors, and their Roles:** The table intended to link Books, Contributors, and their Roles was designed improperly. The primary key was set on three fields without any Id field, which greatly complicates editing, displaying details, and removing data. The search for the right position in the database occurs by giving an Id. As a result, handling these elements was not implemented.
+3. **Correct implementation of the `BookContributors` table**
+   1. To implement this functionality correctly, you need to add the Id field to the table.
+   2. In order to be able to add only one Contributor with a given Role to one Book, it is necessary to create appropriate business classes that verify this condition.
+
+These issues need attention and fixing to ensure that the application can operate smoothly.
+
+[[top](#table-of-contents)]
+
 ## Contribution
 
 The project has been completed and will not be further developed, but any suggestions are welcome. Please open issues to share your feedback.
+
+[[top](#table-of-contents)]
 
 ## License
 
 This project is licensed under the MIT license.
 
-</details>
-
-<details>
-<summary>Legenda</summary>
-<br>
-Commit <commit>name of commit[use <commit\>text</commit\>]</commit><br/>
-Inline code mark <code>code tag [use \`text\`]</code><br/>
-Keyboard shortcut, path mark or command <kbd>kbd tag [use <kbd\>text</kbd\>]</kbd><br/>
-Text highlighting mark <mark>mark tag [use <mark\>text</mark\>]</mark><br/>
-</details>
-
-<style>
-    commit,
-    mark {
-        display: inline-block;
-        border-radius: 3px;
-        font-family: Consolas, "Liberation Mono", Courier, monospace;
-        font-size: 1em;
-        padding: 0 7px;
-        margin: 0 5px;
-        line-height: 20px;
-    }
-    commit {
-        color: rgb(245, 245, 245);
-        background-color: #ff5858;
-    }
-</style>
+[[top](#table-of-contents)]
