@@ -59,6 +59,8 @@
 
 BookWormMVC is an educational project created using **ASP.NET Core 6 MVC** and **C# 10**. The main goal of the project was to understand and practically use the handling of `one-to-many` and `many-to-many` relationships in the database.
 
+Extensive documentation helps to understand the project and draw your own conclusions for further learning.
+
 [[top](#table-of-contents)]
 
 ## Functionality
@@ -326,8 +328,8 @@ During the creation and testing of the `BookWormMVC` project, I noticed several 
 1. **Several warnings about a possible null value:** While coding and testing the project, I encountered **CS8602: Dereference of a possibly null reference warnings**. This is a potential source of errors during the application's operation, especially when this value is used in calculations or operations that are not prepared for null values.
 2. **Improperly designed table `BookContributors` connecting Books, Contributors, and their Roles:** The table intended to link Books, Contributors, and their Roles was designed improperly. The primary key was set on three fields without any Id field, which greatly complicates editing, displaying details, and removing data. The search for the right position in the database occurs by giving an Id. As a result, handling these elements was not implemented.
 3. **Correct implementation of the `BookContributors` table**
-   1. To implement this functionality correctly, you need to add the Id field to the table.
-   2. In order to be able to add only one Contributor with a given Role to one Book, it is necessary to create appropriate business classes that verify this condition.
+   - To implement this functionality correctly, you need to add the Id field to the table.
+   - In order to be able to add only one Contributor with a given Role to one Book, it is necessary to create appropriate business classes that verify this condition.
 
 These issues need attention and fixing to ensure that the application can operate smoothly.
 
