@@ -314,8 +314,14 @@ Another important element of learning was **understanding the process of plannin
 
 During the creation and testing of the `BookWormMVC` project, I noticed several issues that need to be addressed:
 
-- [ ] **Several warnings about a possible null value:** While coding and testing the project, I encountered **CS8602: Dereference of a possibly null reference warnings**. This is a potential source of errors during the application's operation, especially when this value is used in calculations or operations that are not prepared for null values.
-- [ ] **Improperly designed table `BookContributors` connecting Books, Contributors, and their Roles:** The table intended to link Books, Contributors, and their Roles was designed improperly. The primary key was set on three fields without any Id field, which greatly complicates editing, displaying details, and removing data. The search for the right position in the database occurs by giving an Id. As a result, handling these elements was not implemented.
+- [ ] **Several warnings about a possible null value**
+
+    While coding and testing the project, I encountered **CS8602: Dereference of a possibly null reference warnings**. This is a potential source of errors during the application's operation, especially when this value is used in calculations or operations that are not prepared for null values.
+
+- [ ] **Improperly designed table `BookContributors` connecting Books, Contributors, and their Roles**
+
+    The table intended to link Books, Contributors, and their Roles was designed improperly. The primary key was set on three fields without any Id field, which greatly complicates editing, displaying details, and removing data. The search for the right position in the database occurs by giving an Id. As a result, handling these elements was not implemented.
+    
 - [ ] **Correct implementation of the `BookContributors` table**
     - [ ] To implement this functionality correctly, you need to add the Id field to the table.
     - [ ] In order to be able to add only one Contributor with a given Role to one Book, it is necessary to create appropriate business classes that verify this condition.
