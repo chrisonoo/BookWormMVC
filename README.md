@@ -33,7 +33,9 @@
 
 BookWormMVC is an educational project created using **ASP.NET Core 6 MVC**, **C# 10** and **Entity Framework 7.0.x**. The main goal of the project was to understand and practically use the handling of `one-to-many` and `many-to-many` relationships in the database.
 
-In the project, a **seeding approach** was employed, which involves populating the database with sample data. As a result, upon installation of the application, the user immediately has access to data that facilitates understanding of its functions and operation mechanisms. **Extensive documentation** helps to understand the project and draw your own conclusions for further learning.
+In the project, a **seeding approach** was employed, which involves populating the database with sample data. As a result, upon installation of the application, the user immediately has access to data that facilitates understanding of its functions and operation mechanisms. 
+
+**Extensive documentation** helps to understand the project and draw your own conclusions for further learning.
 
 ## Table of Contents
 
@@ -231,7 +233,8 @@ The `BookContributors` table is a junction (intermediate/associative) table betw
 - ASP.NET Core 6 MVC
 - C# 10
 - Entity Framework (utilizing both **Annotations** and **Fluent API**)
-- Code First and Seeding
+- Code First database and Seeding
+- Automatic Resource Management with the **using** statement (during seeding)
 - Soft Delete (tables: Contributors, Contributor Roles, Publishers)
 - Hard Delete (tables: Books, Book Contributor)
 
@@ -271,7 +274,6 @@ The project uses standard dependencies for **ASP.NET Core 6 MVC**:
     - [x] Adď the Entity classes
     - [x] Add Annotations and Fluent API configuration to the Entity classes
     - [x] Add Database configuration
-    - [x] Add demonstration data to the application (seeding). 
     - [x] Add migration
     - [x] Update database
 - [x] Add Controllers and Views
@@ -305,6 +307,7 @@ The project uses standard dependencies for **ASP.NET Core 6 MVC**:
     - [x] Add the display of contributors in `Books > Details` view, with a division into Authors and other Contributors (many-to-many relationship).
 - [x] Adjust the Book Contributors
     - [x] Change the description of the page from Index to Book Contributors in the `Book Contributors > Index` view.
+- [x] Add demonstration data to the application (seeding). 
 
 [[top](#table-of-contents)]
 
