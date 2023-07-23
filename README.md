@@ -1,8 +1,8 @@
 <div align="center">
     <h1>Book Worm MVC</h1>
     <h3>
-        <a href="#installation">
-            Demo
+        <a href="#quickstart">
+            Quickstart
         </a>
         <span> | </span>
         <a href="https://github.com/chrisonoo/BookWormMVC">
@@ -29,6 +29,21 @@
 </div>
 <br>
 
+<h2 id="table-of-contents">Table of Contents</h2>
+
+- [Description](#description)
+- [Quickstart](#quickstart)
+- [Functionality](#functionality)
+- [Database Schema (BookWormMVC)](#database-schema-bookwormmvc)
+- [Feature List](#feature-list)
+- [Technologies, Tools, Strategies and Programming Techniques](#technologies-tools-strategies-and-programming-techniques)
+- [Dependencies](#dependencies)
+- [Workflow](#workflow)
+- [Summary](#summary)
+- [Known Issues](#known-issues)
+- [Contribution](#contribution)
+- [License](#license)
+
 ## Description
 
 BookWormMVC is an educational project created using **ASP.NET Core 6 MVC**, **C# 10** and **Entity Framework 7.0.x**. The main goal of the project was to understand and practically use the handling of `one-to-many` and `many-to-many` relationships in the database.
@@ -37,31 +52,19 @@ In the project, a **seeding approach** was employed, which involves populating t
 
 **Extensive documentation** helps to understand the project and draw your own conclusions for further learning.
 
-## Table of Contents
+## Quickstart
 
-- [Description](#description)
-- [Table of Contents](#table-of-contents)
-- [Functionality](#functionality)
-- [Database Schema (BookWormMVC)](#database-schema-bookwormmvc)
-  - [Table: Books](#table-books)
-  - [Table: Publishers](#table-publishers)
-  - [Table: Contributors](#table-contributors)
-  - [Table: Roles](#table-roles)
-  - [Table: BookContributors](#table-bookcontributors)
-- [Feature List](#feature-list)
-  - [Features for books:](#features-for-books)
-  - [Features for publishers:](#features-for-publishers)
-  - [Features for contributors:](#features-for-contributors)
-  - [Features for contributor roles:](#features-for-contributor-roles)
-  - [Features for book contributors:](#features-for-book-contributors)
-- [Technologies, Tools, Strategies and Programming Techniques](#technologies-tools-strategies-and-programming-techniques)
-- [Dependencies](#dependencies)
-- [Installation](#installation)
-- [Workflow](#workflow)
-- [Summary](#summary)
-- [Known Issues](#known-issues)
-- [Contribution](#contribution)
-- [License](#license)
+1. Open a terminal on your computer and navigate to the location where you want to download the application.
+2. Run the command `git clone https://github.com/chrisonoo/BookWormMVC.git` and clone the application repository to the chosen folder on your disk.
+3. Open the solution in Visual Studio 2022 and run <kbd>Build > Build Solution</kbd>.
+4. Set the project **BookWorm.MVC** as the Startup Project.
+5. Open <kbd>Tools > NuGet Package Manager > Package Manager Console</kbd>.
+6. In the Package Manager Console, set <kbd>Default project: BookWorm.MVC</kbd>.
+7. Type the command `add-migration Initial` in the Package Manager Console and execute it. This command will create a database migration file and perform seeding.
+8. Type the command `update-database` in the Package Manager Console and execute it. This command will create a database and upload sample data into the local database.
+9. Demo data will be uploaded to the database after the first launch of the application.
+
+[[top](#table-of-contents)]
 
 ## Functionality
 
@@ -248,20 +251,6 @@ The project uses standard dependencies for **ASP.NET Core 6 MVC**:
 - Microsoft.EntityFrameworkCore.SqlServer 7.0.9
 - Microsoft.EntityFrameworkCore.Tools 7.0.9
 - Microsoft.VisualStudio.Web.CodeGeneration.Design 6.0.15
-
-[[top](#table-of-contents)]
-
-## Installation
-
-1. Open a terminal on your computer and navigate to the location where you want to download the application.
-2. Run the command `git clone https://github.com/chrisonoo/BookWormMVC.git` and clone the application repository to the chosen folder on your disk.
-3. Open the solution in Visual Studio 2022 and run <kbd>Build > Build Solution</kbd>.
-4. Set the project **BookWorm.MVC** as the Startup Project.
-5. Open <kbd>Tools > NuGet Package Manager > Package Manager Console</kbd>.
-6. In the Package Manager Console, set <kbd>Default project: BookWorm.MVC</kbd>.
-7. Type the command `add-migration Initial` in the Package Manager Console and execute it. This command will create a database migration file and perform seeding.
-8. Type the command `update-database` in the Package Manager Console and execute it. This command will create a database and upload sample data into the local database.
-9. Demo data will be uploaded to the database after the first launch of the application.
 
 [[top](#table-of-contents)]
 
