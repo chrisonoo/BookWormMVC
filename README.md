@@ -33,7 +33,7 @@
 
 BookWormMVC is an educational project created using **ASP.NET Core 6 MVC**, **C# 10** and **Entity Framework 7.0.x**. The main goal of the project was to understand and practically use the handling of `one-to-many` and `many-to-many` relationships in the database.
 
-Extensive documentation helps to understand the project and draw your own conclusions for further learning.
+In the project, a **seeding approach** was employed, which involves populating the database with sample data. As a result, upon installation of the application, the user immediately has access to data that facilitates understanding of its functions and operation mechanisms. **Extensive documentation** helps to understand the project and draw your own conclusions for further learning.
 
 ## Table of Contents
 
@@ -257,7 +257,8 @@ The project uses standard dependencies for **ASP.NET Core 6 MVC**:
 5. Open <kbd>Tools > NuGet Package Manager > Package Manager Console</kbd>.
 6. In the Package Manager Console, set <kbd>Default project: BookWorm.MVC</kbd>.
 7. Type the command `add-migration Initial` in the Package Manager Console and execute it. This command will create a database migration file and perform seeding.
-8. Type the command `upgrade-database` in the Package Manager Console and execute it. This command will create a database and upload sample data into the local database.
+8. Type the command `update-database` in the Package Manager Console and execute it. This command will create a database and upload sample data into the local database.
+9. Demo data will be uploaded to the database after the first launch of the application.
 
 [[top](#table-of-contents)]
 
@@ -270,7 +271,7 @@ The project uses standard dependencies for **ASP.NET Core 6 MVC**:
     - [x] Adď the Entity classes
     - [x] Add Annotations and Fluent API configuration to the Entity classes
     - [x] Add Database configuration
-    - [ ] Add demonstration data to the application (seeding). 
+    - [x] Add demonstration data to the application (seeding). 
     - [x] Add migration
     - [x] Update database
 - [x] Add Controllers and Views
@@ -287,25 +288,23 @@ The project uses standard dependencies for **ASP.NET Core 6 MVC**:
     - [x] Add the display of books published by the Publisher to the `Publisher > Details` view.
     - [X] Adjust the `PublishersController.Delete` so that clicking <kbd>Delete</kbd> changes the IsActive field to false.
 - [x] Adjust the Contributor Roles
-    - [ ] Change the description of the page from Index to Contributor Roles in the `Contributor Roles > Index` view.
+    - [x] Change the description of the page from Index to Contributor Roles in the `Contributor Roles > Index` view.
     - [x] Add a column to display information from the IsActive field in the `Contributor Roles > Index` view.
     - [x] Add editing of the IsActive field in the `Contributor Roles > Edit` view.
     - [x] Add the display of the IsActive field in the `Contributor Roles > Details` view.
     - [X] Adjust the `ContributorRolesController.Delete` so that clicking <kbd>Delete</kbd> changes the IsActive field to false.
 - [x] Adjust the Contributors
-    - [ ] Change the description of the page from Index to Contributors in the `Contributors > Index` view.
+    - [x] Change the description of the page from Index to Contributors in the `Contributors > Index` view.
     - [x] Add a column to display information from the IsActive field in the `Contributors > Index` view.
     - [x] Add editing of the IsActive field in the `Contributors > Edit` view.
     - [x] Add the display of the IsActive field in the `Contributors > Details` view.
     - [X] Adjust the `ContributorsController.Delete` so that clicking <kbd>Delete</kbd> changes the IsActive field to false.
 - [x] Adjust the Books
-    - [ ] Change the description of the page from Index to Books in the `Books > Index` view.
+    - [x] Change the description of the page from Index to Books in the `Books > Index` view.
     - [x] Add the display of Publisher (foreign key) to the `Books > Index` view.
     - [x] Add the display of contributors in `Books > Details` view, with a division into Authors and other Contributors (many-to-many relationship).
 - [x] Adjust the Book Contributors
-    - [ ] Change the description of the page from Index to Book Contributors in the `Book Contributors > Index` view.
-    - [ ] Create a filter in the `BookContributorsController` that filters out inactive Contributors in the `Book Contributors > Create` view.
-    - [ ] Create a filter in the `BookContributorsController` that filters out inactive Contributor Roles in the `Book Contributors > Create` view.
+    - [x] Change the description of the page from Index to Book Contributors in the `Book Contributors > Index` view.
 
 [[top](#table-of-contents)]
 
@@ -323,11 +322,14 @@ Another important element of learning was **understanding the process of plannin
 
 During the creation and testing of the `BookWormMVC` project, I noticed several issues that need to be addressed:
 
-1. **Several warnings about a possible null value:** While coding and testing the project, I encountered **CS8602: Dereference of a possibly null reference warnings**. This is a potential source of errors during the application's operation, especially when this value is used in calculations or operations that are not prepared for null values.
-2. **Improperly designed table `BookContributors` connecting Books, Contributors, and their Roles:** The table intended to link Books, Contributors, and their Roles was designed improperly. The primary key was set on three fields without any Id field, which greatly complicates editing, displaying details, and removing data. The search for the right position in the database occurs by giving an Id. As a result, handling these elements was not implemented.
-3. **Correct implementation of the `BookContributors` table**
-   - To implement this functionality correctly, you need to add the Id field to the table.
-   - In order to be able to add only one Contributor with a given Role to one Book, it is necessary to create appropriate business classes that verify this condition.
+- [ ] **Several warnings about a possible null value:** While coding and testing the project, I encountered **CS8602: Dereference of a possibly null reference warnings**. This is a potential source of errors during the application's operation, especially when this value is used in calculations or operations that are not prepared for null values.
+- [ ] **Improperly designed table `BookContributors` connecting Books, Contributors, and their Roles:** The table intended to link Books, Contributors, and their Roles was designed improperly. The primary key was set on three fields without any Id field, which greatly complicates editing, displaying details, and removing data. The search for the right position in the database occurs by giving an Id. As a result, handling these elements was not implemented.
+- [ ] **Correct implementation of the `BookContributors` table**
+    - [ ] To implement this functionality correctly, you need to add the Id field to the table.
+    - [ ] In order to be able to add only one Contributor with a given Role to one Book, it is necessary to create appropriate business classes that verify this condition.
+- [ ] Correct visibility and filter inactive Contributors and Contributor Roles
+    - [ ] Create a filter in the `BookContributorsController` that filters out inactive Contributors in the `Book Contributors > Create` view.
+    - [ ] Create a filter in the `BookContributorsController` that filters out inactive Contributor Roles in the `Book Contributors > Create` view.
 
 These issues need attention and fixing to ensure that the application can operate smoothly.
 

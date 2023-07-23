@@ -1,4 +1,5 @@
 using BookWorm.MVC.Data;
+using BookWorm.MVC.Services.Seeder;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -11,6 +12,17 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 builder.Services.AddControllersWithViews();
 
 var app = builder.Build();
+
+// Add this functionality if developer mode is enabled.
+if(app.Environment.IsDevelopment())
+{
+    // Run the seed initializer if developer mode is enabled
+    using(var scope = app.Services.CreateScope())
+    {
+        var services = scope.ServiceProvider;
+        await BookWormMVCSeeder.SeedSampleDataAsync(services);
+    }
+}
 
 // Configure the HTTP request pipeline.
 if(!app.Environment.IsDevelopment())
