@@ -29,10 +29,16 @@
 </div>
 <br>
 
+## Description
+
+BookWormMVC is an educational project created using **ASP.NET Core 6 MVC**, **C# 10** and **Entity Framework 7.0.x**. The main goal of the project was to understand and practically use the handling of `one-to-many` and `many-to-many` relationships in the database.
+
+Extensive documentation helps to understand the project and draw your own conclusions for further learning.
+
 ## Table of Contents
 
-- [Table of Contents](#table-of-contents)
 - [Description](#description)
+- [Table of Contents](#table-of-contents)
 - [Functionality](#functionality)
 - [Database Schema (BookWormMVC)](#database-schema-bookwormmvc)
   - [Table: Books](#table-books)
@@ -54,14 +60,6 @@
 - [Known Issues](#known-issues)
 - [Contribution](#contribution)
 - [License](#license)
-
-## Description
-
-BookWormMVC is an educational project created using **ASP.NET Core 6 MVC** and **C# 10**. The main goal of the project was to understand and practically use the handling of `one-to-many` and `many-to-many` relationships in the database.
-
-Extensive documentation helps to understand the project and draw your own conclusions for further learning.
-
-[[top](#table-of-contents)]
 
 ## Functionality
 
