@@ -41,7 +41,7 @@
 - [Workflow](#workflow)
 - [Summary](#summary)
 - [Known Issues](#known-issues)
-- [Contribution](#contribution)
+- [Contribution Guidelines](#contribution-guidelines)
 - [License](#license)
 
 ## Description
@@ -256,6 +256,19 @@ The project uses standard dependencies for **ASP.NET Core 6 MVC**:
 
 ## Workflow
 
+```
+⬜   - Task pending
+⬜⏳ - Task in progress
+✅   - Task completed
+```
+
+- [x] Plan the application project
+    - [x] Define the goals of the application
+    - [x] Define the features of the application
+    - [x] Choose the technology and architecture of the application
+    - [x] Design the database
+    - [x] Design the UI/UX
+    - [x] Plan the work and create a Workflow
 - [x] Create solution in Visual Studio 2022
 - [x] Add project ASP.NET Core 6 MVC to solution
 - [x] Database, `code-first` approach
@@ -296,7 +309,20 @@ The project uses standard dependencies for **ASP.NET Core 6 MVC**:
     - [x] Add the display of contributors in `Books > Details` view, with a division into Authors and other Contributors (many-to-many relationship).
 - [x] Adjust the Book Contributors
     - [x] Change the description of the page from Index to Book Contributors in the `Book Contributors > Index` view.
-- [x] Add demonstration data to the application (seeding). 
+- [x] Add demonstration data to the application (seeding).
+- [x] Completion of project documentation
+    - [x] Description
+    - [x] Quickstart or/and Live Demo
+    - [x] Functionality
+    - [x] Database Schema
+    - [x] Feature List
+    - [x] Technologies, Tools, Strategies and Programming Techniques
+    - [x] Dependencies
+    - [x] Workflow
+    - [x] Summary
+    - [x] Known Issues
+    - [x] Contribution Guidelines
+    - [x] License
 
 [[top](#table-of-contents)]
 
@@ -333,7 +359,7 @@ These issues need attention and fixing to ensure that the application can operat
 
 [[top](#table-of-contents)]
 
-## Contribution
+## Contribution Guidelines
 
 The project has been completed and will not be further developed, but any suggestions are welcome. Please open issues to share your feedback.
 
