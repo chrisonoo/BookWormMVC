@@ -78,6 +78,10 @@ The main emphasis was placed on backend development, the frontend is the default
 
 ## Database Schema (BookWormMVC)
 
+In this project, due to ease of implementation and the fact that the project is not intended for deployment, a **local MSSQL** database [(localdb)\MSSQLLocalDB] was used.
+
+A localdb version of MSSQL provides all the important capabilities of the SQL Server database engine but runs in user mode for easy setup and minimal resource usage. Visual Studio 2022 comes with SQL Server Data Tools (SSDT), which includes localdb, so there is no need to install any additional SQL Server software.
+
 ![Database diagram](./docs/img/database-diagram.png)
 
 ### Table: Books
